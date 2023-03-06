@@ -2,11 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: nibiru-node
+  namespace: nibiru
 spec:
   selector:
     matchLabels:
       app: nibiru-node 
   serviceName: "nibiru-node"
+  
   replicas: 1 
   minReadySeconds: 10 
   template:
