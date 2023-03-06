@@ -53,7 +53,8 @@ spec:
               sed -i 's|rpc_servers =.*|rpc_servers = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/rpc_servers)'"|g' /data/config/config.toml;
               sed -i 's|trust_height =.*|trust_height = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_height)'"|g' /data/config/config.toml;
               sed -i 's|trust_hash =.*|trust_hash = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_hash)'"|g' /data/config/config.toml;
-              apt-get install lz4;
+              apt-get install -y lz4;
+              apt-get install -y wget;
               wget -O nibiru.tar.lz4 https://snapshot.silentvalidator.com/testnet/nibiru/nibiru-2023-03-04T08%3A12.tar.lz4  --inet4-only
               lz4 -c -d nibiru.tar.lz4  | tar -x -C /data
           volumeMounts:
