@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nibiru-node 
 spec:
-  storageClassName: rook-ceph-block
+  storageClassName: nibiru-ceph-block
   accessModes:
     - ReadWriteOnce
   resources:
