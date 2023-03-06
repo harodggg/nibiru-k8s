@@ -74,10 +74,6 @@ spec:
           name: rpc-port
         - containerPort: 26658
           name: grpc-port
-        resources:
-          limits:
-                memory: 6G
-                cpu: 4
         readinessProbe:
           tcpSocket:
             port: 26657
