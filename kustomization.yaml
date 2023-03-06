@@ -12,6 +12,10 @@ resources:
 
 secretGenerator:
 - name: validator-key 
+  namespace: nibiru
   literals:
   - password=1f2d1e2e67df
+  options:
+      disableNameSuffixHash: true
+
 
