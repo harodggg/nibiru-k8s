@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nibiru-svc
+  namespace: nibiru
+  labels:
+    app: nibiru-svc
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-nibiru-rpc
+      protocol: TCP
+      port: 30001
+      targetPort: 26657
+  selector:
+    app: nibiru-node
+  clusterIP: None
+  clusterIPs:
+    - None
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
