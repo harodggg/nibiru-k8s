@@ -47,6 +47,8 @@ spec:
             - > 
               export HOME=/data;
               export NETWORK=nibiru-itn-1;
+              apt-get update;
+              apt-get install -y curl;
               curl -s https://networks.itn.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json;
               sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml;
               sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' $HOME/.nibid/config/app.toml;
