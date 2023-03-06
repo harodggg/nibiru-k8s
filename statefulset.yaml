@@ -36,6 +36,7 @@ spec:
       initContainers:
         - name: init-node-curl
           image: curlimages/curl:7.88.1
+          command: ["/bin/sh","-c"]
           args:
             - > 
             export HOME=/data;
