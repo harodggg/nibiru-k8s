@@ -8,7 +8,6 @@ spec:
     matchLabels:
       app: nibiru-node 
   serviceName: "nibiru-node"
-  
   replicas: 1 
   minReadySeconds: 10 
   template:
@@ -48,6 +47,7 @@ spec:
             - > 
               export HOME=/data;
               export NETWORK=nibiru-itn-1;
+              apt install -y sed;
               curl -s https://networks.itn.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json;
               sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml;
               sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' $HOME/.nibid/config/app.toml;
@@ -65,10 +65,36 @@ spec:
             runAsUser: 0
         command: ["/usr/local/bin/nibid","start"]
         args:
-          - --home /data/.nibid
+          - --home=/data/.nibid
+          - --rpc.unsafe 
+          - --rpc.laddr="tcp://0.0.0.0:26657"
+          - --rpc.grpc_laddr="tcp://0.0.0.0:26658"
         ports:
-        - containerPort: 80
-          name: web
+        - containerPort: 26657
+          name: rpc-port
+        - containerPort: 26658
+          name: grpc-port
+        resources:
+          limits:
+                memory: 6G
+                cpu: 4
+          requests:
+                memory: 1G
+                cpu: 0.5
+          readinessProbe:
+            tcpSocket:
+              port: 26657
+            grpc:
+              port: 26658
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 26657
+          grpc:
+            port: 26658
+          initialDelaySeconds: 15
+          periodSeconds: 20
         volumeMounts:
         - name: chain-data
           mountPath: /data 

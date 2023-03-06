@@ -13,6 +13,7 @@ resources:
 secretGenerator:
 - name: validator-key 
   namespace: nibiru
+  type: Opaque
   literals:
   - password=1f2d1e2e67df
   options:
