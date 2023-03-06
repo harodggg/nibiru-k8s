@@ -20,6 +20,14 @@ spec:
       initContainers:
         - name: init-node-key
           image: ghcr.io/nibiruchain/nibiru:latest
+          env:
+            - name: KEYPASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: validator-key
+                  key: password
+          securityContext:
+            runAsUser: 0
           command: ["/bin/sh","-c"]
           args:
             - > 
@@ -27,13 +35,14 @@ spec:
               export NETWORK=nibiru-itn-1;
               alias nibid=/usr/local/bin/nibid;
               nibid init G_XBT --chain-id=nibiru-itn-1 --home $HOME/.nibid;
-              nibid keys add g-key;
-              exit 0;
+              (echo $KEYPASSWD; echo $KEYPASSWD) | nibid keys add g-key &> /data/key.txt;
           volumeMounts:
             - name: chain-data
               mountPath: /data
         - name: init-node-curl
           image: curlimages/curl:7.88.1
+          securityContext:
+            runAsUser: 0
           command: ["/bin/sh","-c"]
           args:
             - > 
@@ -52,6 +61,8 @@ spec:
       containers:
       - name: nibiru-node 
         image: ghcr.io/nibiruchain/nibiru:latest
+        securityContext:
+            runAsUser: 0
         command: ["/usr/local/bin/nibid","start"]
         args:
           - --home /data/.nibid

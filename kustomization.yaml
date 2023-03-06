@@ -10,3 +10,8 @@ resources:
   - pool.yaml
   - storageclass.yaml
 
+secretGenerator:
+- name: validator-key 
+  literals:
+  - password=1f2d1e2e67df
+
