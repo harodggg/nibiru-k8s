@@ -81,13 +81,13 @@ spec:
           requests:
                 memory: 1G
                 cpu: 0.5
-          readinessProbe:
-            tcpSocket:
-              port: 26657
-            grpc:
-              port: 26658
-            initialDelaySeconds: 5
-            periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 26657
+          grpc:
+            port: 26658
+          initialDelaySeconds: 5
+          periodSeconds: 10
         livenessProbe:
           tcpSocket:
             port: 26657
