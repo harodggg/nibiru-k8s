@@ -33,6 +33,7 @@ spec:
               alias nibid=/usr/local/bin/nibid;
               nibid init G_XBT --chain-id=nibiru-itn-1 --home /data;
               (echo $KEYPASSWD; echo $KEYPASSWD) | nibid keys add g-key &> /data/key.txt;
+              nibid tendermint unsafe-reset-all --home /data --keep-addr-book;
           volumeMounts:
             - name: chain-data
               mountPath: /data
@@ -42,16 +43,18 @@ spec:
             runAsUser: 0
           command: ["/bin/sh","-c"]
           args:
-            - > 
-              apt-get update;
-              apt-get install -y curl;
-              curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/genesis > /data/config/genesis.json;
-              sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/seeds)'"|g' /data/config/config.toml;
-              sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' /data/config/app.toml;
-              sed -i 's|enable =.*|enable = true|g' /data/config/config.toml;
-              sed -i 's|rpc_servers =.*|rpc_servers = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/rpc_servers)'"|g' /data/config/config.toml;
-              sed -i 's|trust_height =.*|trust_height = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_height)'"|g' /data/config/config.toml;
-              sed -i 's|trust_hash =.*|trust_hash = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_hash)'"|g' /data/config/config.toml;
+            -  apt-get update;
+            -  apt-get install -y curl;
+            -  curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/genesis > /data/config/genesis.json;
+            -  sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/seeds)'"|g' /data/config/config.toml;
+            -  sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' /data/config/app.toml;
+            -  sed -i 's|enable =.*|enable = true|g' /data/config/config.toml;
+            -  sed -i 's|rpc_servers =.*|rpc_servers = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/rpc_servers)'"|g' /data/config/config.toml;
+            -  sed -i 's|trust_height =.*|trust_height = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_height)'"|g' /data/config/config.toml;
+            -  sed -i 's|trust_hash =.*|trust_hash = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_hash)'"|g' /data/config/config.toml;
+            -  apt-get install lz4;
+            -  wget -O nibiru.tar.lz4 https://snapshot.silentvalidator.com/testnet/nibiru/nibiru-2023-03-04T08%3A12.tar.lz4  --inet4-only
+            -  lz4 -c -d nibiru.tar.lz4  | tar -x -C /data
           volumeMounts:
             - name: chain-data
               mountPath: /data
