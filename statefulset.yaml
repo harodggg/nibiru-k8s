@@ -30,10 +30,8 @@ spec:
           command: ["/bin/sh","-c"]
           args:
             - > 
-              export HOME=/data;
-              export NETWORK=nibiru-itn-1;
               alias nibid=/usr/local/bin/nibid;
-              nibid init G_XBT --chain-id=nibiru-itn-1 --home $HOME/.nibid;
+              nibid init G_XBT --chain-id=nibiru-itn-1 --home /data/.nibid;
               (echo $KEYPASSWD; echo $KEYPASSWD) | nibid keys add g-key &> /data/key.txt;
           volumeMounts:
             - name: chain-data
@@ -45,17 +43,15 @@ spec:
           command: ["/bin/sh","-c"]
           args:
             - > 
-              export HOME=/data;
-              export NETWORK=nibiru-itn-1;
               apt-get update;
               apt-get install -y curl;
-              curl -s https://networks.itn.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json;
-              sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml;
-              sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' $HOME/.nibid/config/app.toml;
-              sed -i 's|enable =.*|enable = true|g' $HOME/.nibid/config/config.toml
-              sed -i 's|rpc_servers =.*|rpc_servers = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/rpc_servers)'"|g' $HOME/.nibid/config/config.toml
-              sed -i 's|trust_height =.*|trust_height = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/trust_height)'"|g' $HOME/.nibid/config/config.toml
-              sed -i 's|trust_hash =.*|trust_hash = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/trust_hash)'"|g' $HOME/.nibid/config/config.toml
+              curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/genesis > /data/.nibid/config/genesis.json;
+              sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/seeds)'"|g' /data/.nibid/config/config.toml;
+              sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' /data/.nibid/config/app.toml;
+              sed -i 's|enable =.*|enable = true|g' /data/.nibid/config/config.toml
+              sed -i 's|rpc_servers =.*|rpc_servers = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/rpc_servers)'"|g' /data/.nibid/config/config.toml
+              sed -i 's|trust_height =.*|trust_height = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_height)'"|g' /data/.nibid/config/config.toml
+              sed -i 's|trust_hash =.*|trust_hash = "'$(curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/trust_hash)'"|g' /data/.nibid/config/config.toml
           volumeMounts:
             - name: chain-data
               mountPath: /data
