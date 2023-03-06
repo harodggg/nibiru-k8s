@@ -78,9 +78,6 @@ spec:
           limits:
                 memory: 6G
                 cpu: 4
-          requests:
-                memory: 1G
-                cpu: 0.5
         readinessProbe:
           tcpSocket:
             port: 26657
