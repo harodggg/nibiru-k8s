@@ -28,6 +28,7 @@ spec:
               alias nibid=/usr/local/bin/nibid;
               nibid init G_XBT --chain-id=nibiru-itn-1 --home $HOME/.nibid;
               nibid keys add g-key;
+              exit 0;
           volumeMounts:
             - name: chain-data
               mountPath: /data
