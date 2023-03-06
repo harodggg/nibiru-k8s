@@ -64,8 +64,8 @@ spec:
         args:
           - --home=/data
           - --rpc.unsafe 
-          - --rpc.laddr="tcp://0.0.0.0:26657"
-          - --rpc.grpc_laddr="tcp://0.0.0.0:26658"
+          - --rpc.laddr=tcp://0.0.0.0:26657
+          - --rpc.grpc_laddr=tcp://0.0.0.0:26658
         ports:
         - containerPort: 26657
           name: rpc-port
