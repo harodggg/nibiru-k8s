@@ -39,7 +39,7 @@ spec:
             - name: chain-data
               mountPath: /data
         - name: init-node-curl
-          image: curlimages/curl:7.88.1
+          image: ubuntu:latest
           securityContext:
             runAsUser: 0
           command: ["/bin/sh","-c"]
@@ -47,8 +47,6 @@ spec:
             - > 
               export HOME=/data;
               export NETWORK=nibiru-itn-1;
-              apk update;
-              apk add --no-cache sed;
               curl -s https://networks.itn.nibiru.fi/$NETWORK/genesis > $HOME/.nibid/config/genesis.json;
               sed -i 's|seeds =.*|seeds = "'$(curl -s https://networks.itn.nibiru.fi/$NETWORK/seeds)'"|g' $HOME/.nibid/config/config.toml;
               sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g' $HOME/.nibid/config/app.toml;
