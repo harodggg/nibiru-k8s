@@ -5,6 +5,7 @@ metadata:
   namespace: nibiru 
 spec:
   failureDomain: host
-  requireSafeReplicaSize: false
   replicated:
     size: 1
+    requireSafeReplicaSize: false
+  
