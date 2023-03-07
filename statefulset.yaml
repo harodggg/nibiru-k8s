@@ -51,11 +51,20 @@ spec:
               apk add curl;
               apk add wget;
               apk add lz4;
+              export HOME="/data;
               curl -s https://networks.itn.nibiru.fi/nibiru-itn-1/genesis > /data/config/genesis.json;
               PEERS="df8596fa04abeff1d15b79570ff8c3eba85ed87a@35.185.8.9:26656,4a81486786a7c744691dc500360efcdaf22f0840@15.235.46.50:26656,c709cad9e11b315644fe8f1d2e90c03c5cba685c@34.91.8.241:26656,930b1eb3f0e57b97574ed44cb53b69fb65722786@144.76.30.36:15662,ad002a4592e7bcdfff31eedd8cee7763b39601e7@65.109.122.105:36656";
               SEEDS="a431d3d1b451629a21799963d9eb10d83e261d2c@seed-1.itn-1.nibiru.fi:26656,6a78a2a5f19c93661a493ecbe69afc72b5c54117@seed-2.itn-1.nibiru.fi:26656";
               sed -i -e "s|seeds =.*|seeds = \"$SEEDS\"|g" /data/config/config.toml;
               sed -i -e "s|persistent_peers =.*|persistent_peers = \"$PEERS\"|g" /data/config/config.toml;
+              pruning="custom"; 
+              pruning_keep_recent="100";
+              pruning_keep_every="0"; 
+              pruning_interval="10";
+              sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/config/app.toml; 
+              sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/config/app.toml;
+              sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/config/app.toml;
+              sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/config/app.toml;
               wget -O nibiru.tar.lz4 https://snapshot.silentvalidator.com/testnet/nibiru/nibiru-2023-03-07T07%3A24.tar.lz4 --inet4-only;
               lz4 -c -d nibiru.tar.lz4  | tar -x -C /data;
           volumeMounts:
