@@ -99,7 +99,6 @@ spec:
         volumeMounts:
         - name: chain-data
           mountPath: /data 
-        restartPolicy: OnFailure
       volumes:
         - name: chain-data
           persistentVolumeClaim:
