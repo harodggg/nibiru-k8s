@@ -103,3 +103,5 @@ spec:
         - name: chain-data
           persistentVolumeClaim:
             claimName: nibiru-node-pvc
+      restartPolicy: OnFailure
+
