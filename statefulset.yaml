@@ -65,7 +65,7 @@ spec:
               mountPath: /data
       containers:
       - name: nibiru-node 
-        image: ghcr.io/nibiruchain/nibiru:latest
+        image: ghcr.io/nibiruchain/nibiru:0.19.02
         securityContext:
             runAsUser: 0
         command: ["/usr/local/bin/nibid","start"]
