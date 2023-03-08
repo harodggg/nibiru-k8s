@@ -57,7 +57,7 @@ spec:
               sed -i -e "s|seeds =.*|seeds = \"$SEEDS\"|g" /data/config/config.toml;
               sed -i -e "s|persistent_peers =.*|persistent_peers = \"$PEERS\"|g" /data/config/config.toml;
               sed  -i -e 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025unibi"/g'  /data/config/app.toml;
-              sed -i -e "s/^pruning *=.*/pruning = "custom" /data/config/app.toml; 
+              sed -i -e "s/^pruning *=.*/pruning = \"custom\" /data/config/app.toml; 
               sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent =\"100\"" /data/config/app.toml;
               sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"0\"" /data/config/app.toml;
               sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"" /data/config/app.toml;
