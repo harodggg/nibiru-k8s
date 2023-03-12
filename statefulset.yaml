@@ -35,7 +35,7 @@ spec:
               alias nibid=/usr/local/bin/nibid;
               nibid init G_XBT --chain-id=nibiru-itn-1 --home /data;
               (echo $KEYPASSWD; echo $KEYPASSWD) | nibid keys add g-key &> /data/key.txt;
-              wget -O /data/config/addrbook.json https://snapshot.silentvalidator.com/testnet/nibiru/addrbook.json;
+              wget -O /data/config/addrbook.json https://snapshots2-testnet.nodejumper.io/nibiru-testnet/addrbook.json;
               nibid tendermint unsafe-reset-all --home /data --keep-addr-book;
           volumeMounts:
             - name: chain-data
