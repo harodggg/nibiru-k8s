@@ -73,11 +73,14 @@ spec:
           - --rpc.unsafe 
           - --rpc.laddr=tcp://0.0.0.0:26657
           - --rpc.grpc_laddr=tcp://0.0.0.0:26658
+          - --rpc.upnp
         ports:
         - containerPort: 26657
           name: rpc-port
         - containerPort: 26658
           name: grpc-port
+        - contianerPort: 26656
+          name: p2p
         resources:
           limits:
                 memory: 6G
