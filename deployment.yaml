@@ -73,8 +73,8 @@ spec:
               sed -i -e "s~^pruning-keep-recent *=.*~pruning-keep-recent =\"100\"~g" /data/config/app.toml;
               sed -i -e "s~^pruning-keep-every *=.*~pruning-keep-every = \"0\"~g" /data/config/app.toml;
               sed -i -e "s~^pruning-interval *=.*~pruning-interval = \"10\"~g" /data/config/app.toml;
-              wget -O https://snapshots2-testnet.nodejumper.io/nibiru-testnet/wasm.lz4 --inet4-only;
-              lz4 -dc wasm.lz4  | tar -xf - -C /data/data;              
+              wget -O wasm.tar.lz4 https://snapshots2-testnet.nodejumper.io/nibiru-testnet/wasm.lz4 --inet4-only;
+              lz4 -dc wasm.tar.lz4  | tar -xf - -C /data/data;              
           volumeMounts:
             - name: chain-data
               mountPath: /data
