@@ -4,7 +4,6 @@ metadata:
   name: nibiru-node
   namespace: nibiru
 spec:
-  nodeName: master-1
   selector:
     matchLabels:
       app: nibiru-node 
@@ -15,6 +14,7 @@ spec:
       labels:
         app: nibiru-node 
     spec:
+      nodeName: master-1
       terminationGracePeriodSeconds: 10
       initContainers:
         - name: init-node-key
