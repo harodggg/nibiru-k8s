@@ -59,7 +59,8 @@ spec:
               sed -i -e "s~^pruning-keep-recent *=.*~pruning-keep-recent =\"100\"~g" /data/config/app.toml;
               sed -i -e "s~^pruning-keep-every *=.*~pruning-keep-every = \"0\"~g" /data/config/app.toml;
               sed -i -e "s~^pruning-interval *=.*~pruning-interval = \"10\"~g" /data/config/app.toml;
-              curl https://snapshots2-testnet.nodejumper.io/nibiru-testnet/nibiru-itn-1_2023-03-13.tar.lz4 --only-net4; 
+              curl https://snapshots2-testnet.nodejumper.io/nibiru-testnet/nibiru-itn-1_2023-03-13.tar.lz4 | lz4 -dc - | tar -xf - -C /data;
+
           volumeMounts:
             - name: chain-data
               mountPath: /data
