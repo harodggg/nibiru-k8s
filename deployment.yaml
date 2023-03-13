@@ -79,7 +79,7 @@ spec:
           name: rpc-port
         - containerPort: 26658
           name: grpc-port
-        - contianerPort: 26656
+        - containerPort: 26656
           name: p2p
         resources:
           limits:
