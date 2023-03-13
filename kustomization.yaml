@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - svc.yaml
   - namespace.yaml
-  - statefulset.yaml
+  - deployment.yaml
   - ingress.yaml
   - pvc.yaml
   - pool.yaml
