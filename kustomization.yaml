@@ -7,9 +7,9 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - ingress.yaml
-  - pvc.yaml
-  - pool.yaml
-  - storageclass.yaml
+#  - pvc.yaml
+# - pool.yaml
+# - storageclass.yaml
 
 secretGenerator:
 - name: validator-key 
